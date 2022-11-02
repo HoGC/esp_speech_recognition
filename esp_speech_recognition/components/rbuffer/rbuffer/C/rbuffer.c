@@ -359,6 +359,7 @@ uint32_t rbuffer_get_buffer(rbuffer_handle_t handle, uint32_t index, void *buffe
         return 0;
     }
 
+    index = index%rbuffer->init_size;
 
     size = MIN(size, rbuffer->init_size);
 
@@ -367,7 +368,6 @@ uint32_t rbuffer_get_buffer(rbuffer_handle_t handle, uint32_t index, void *buffe
     memcpy(buffer, (uint8_t *)rbuffer->buffer + index, move_size);
 
     if(size - move_size > 0){
-        rbuffer->read_pos = 0;
         memcpy((uint8_t *)buffer + move_size, rbuffer->buffer, size - move_size);
         move_size = size - move_size;
     }

@@ -186,6 +186,8 @@ bool Rbuffer::get_end_backward_index(uint32_t backward, uint32_t *index){
 uint32_t Rbuffer::get_buffer(uint32_t index, void *buffer, uint32_t size){
     uint32_t move_size;
 
+    index = index%m_init_size;
+
     size = MIN(size, m_init_size);
 
     move_size = MIN(size, m_init_size - index);
@@ -193,7 +195,6 @@ uint32_t Rbuffer::get_buffer(uint32_t index, void *buffer, uint32_t size){
     memcpy(buffer, (uint8_t *)m_buffer + index, move_size);
 
     if(size - move_size > 0){
-        m_read_pos = 0;
         memcpy((uint8_t *)buffer + move_size, m_buffer, size - move_size);
         move_size = size - move_size;
     }
