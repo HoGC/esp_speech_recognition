@@ -53,18 +53,18 @@ static const esp_mn_iface_t *m_multinet = &MULTINET_MODEL;
 
 static void i2s_init(void){
     i2s_config_t i2s_config = {
-    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),
-    .sample_rate = 16000,
-    .bits_per_sample = I2S_BITS_PER_SAMPLE_32BIT,
-    // .channel_format = I2S_CHANNEL_FMT_ONLY_RIGHT,
-    .channel_format = I2S_CHANNEL_FMT_ONLY_RIGHT,
-    .communication_format = i2s_comm_format_t(I2S_COMM_FORMAT_STAND_I2S),
-    .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
-    .dma_buf_count = 4,
-    .dma_buf_len = 64,
-    .use_apll = false,
-    .tx_desc_auto_clear = false,
-    .fixed_mclk = 0
+        .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),
+        .sample_rate = 16000,
+        .bits_per_sample = I2S_BITS_PER_SAMPLE_32BIT,
+        // .channel_format = I2S_CHANNEL_FMT_ONLY_RIGHT,
+        .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,
+        .communication_format = i2s_comm_format_t(I2S_COMM_FORMAT_STAND_I2S),
+        .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
+        .dma_buf_count = 4,
+        .dma_buf_len = 64,
+        .use_apll = false,
+        .tx_desc_auto_clear = false,
+        .fixed_mclk = 0
     };
     i2s_pin_config_t pin_config = {
         .bck_io_num = SPEECH_I2S_BCK_PIN,
@@ -117,7 +117,7 @@ void nnTask(void *arg)
             uint32_t index = 0;
             m_rbuffer->get_end_backward_index((uint32_t)(AUDIO_LENGTH*sizeof(int16_t)), &index);
             m_rbuffer->get_buffer(index, buffer, AUDIO_LENGTH*sizeof(int16_t));        
-                                    float *input_buffer = m_nn->getInputBuffer();
+            float *input_buffer = m_nn->getInputBuffer();
             m_audio_processor->get_spectrogram(buffer, input_buffer);
             float output = m_nn->predict();
             if (output > 0.95)
