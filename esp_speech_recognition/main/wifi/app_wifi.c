@@ -76,6 +76,7 @@ static void _event_handler(void* arg, esp_event_base_t event_base,
         ESP_LOGI(TAG, "SSID:%s", ssid);
         ESP_LOGI(TAG, "PASSWORD:%s", password);
 
+        esp_wifi_set_mode(WIFI_MODE_STA);
         ESP_ERROR_CHECK( esp_wifi_disconnect() );
         ESP_ERROR_CHECK( esp_wifi_set_config(WIFI_IF_STA, &wifi_config) );
         esp_wifi_connect();
@@ -136,6 +137,7 @@ void app_wifi_connect(const char *ssid, const char *password){
     ESP_LOGI(TAG, "SSID:%s", ssid);
     ESP_LOGI(TAG, "PASSWORD:%s", password);
 
+    esp_wifi_set_mode(WIFI_MODE_STA);
     ESP_ERROR_CHECK( esp_wifi_disconnect() );
     ESP_ERROR_CHECK( esp_wifi_set_config(WIFI_IF_STA, &wifi_config) );
     esp_wifi_connect();
