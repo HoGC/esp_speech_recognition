@@ -19,6 +19,7 @@
 
 #pragma once
 
+#include "esp_nn_defs.h"
 #include "esp_nn_ansi_headers.h"
 
 #define esp_nn_add_elementwise_s8 esp_nn_add_elementwise_s8_ansi
@@ -40,3 +41,7 @@
 #define esp_nn_max_pool_s8 esp_nn_max_pool_s8_ansi
 
 #define esp_nn_fully_connected_s8 esp_nn_fully_connected_s8_ansi
+
+#define esp_nn_get_softmax_scratch_size esp_nn_get_softmax_scratch_size_ansi
+#define esp_nn_set_softmax_scratch_buf esp_nn_set_softmax_scratch_buf_ansi
+#define esp_nn_softmax_s8 esp_nn_softmax_s8_ansi
