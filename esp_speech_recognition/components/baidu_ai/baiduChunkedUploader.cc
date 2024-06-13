@@ -5,7 +5,6 @@
 #include "lwip/sys.h"
 #include "lwip/netdb.h"
 #include "lwip/dns.h"
-#include "esp_event.h"
 #include "esp_log.h"
 #include <string.h>
 #include "freertos/FreeRTOS.h"

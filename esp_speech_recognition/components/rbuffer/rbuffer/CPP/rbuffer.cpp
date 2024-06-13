@@ -212,7 +212,7 @@ void Rbuffer::dump(uint32_t size){
     for (i = 0; i < m_curr_size; i++)
     {
         if(i%16==0){
-            RBUFFER_PRINTF("\n[%d - %d]: ", i, ((m_curr_size-i)>16)?(i+15):(i+m_curr_size-i-1));
+            RBUFFER_PRINTF("\n[%ld - %ld]: ", i, ((m_curr_size-i)>16)?(i+15):(i+m_curr_size-i-1));
         }
         RBUFFER_PRINTF("%d ", *((uint8_t *)m_buffer + (m_init_size + m_read_pos + i)%m_init_size)); 
     }
